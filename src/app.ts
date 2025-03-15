@@ -3,11 +3,22 @@ import dotenv from 'dotenv';
 import dbConnect from "./db/dbConnect";
 import authRoutes from "./routes/authRoutes";
 import profileRoutes from "./routes/profileRoutes";
+import cors from 'cors';
+import rideRoutes from "./routes/rideRoutes";
 
 // Configure dotenv
 dotenv.config();
 
 const app: Application = express();
+
+// CORS configuration
+app.use(cors({
+	origin: process.env.CLIENT_URL || 'http://localhost:3000',
+	credentials: true,
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+	allowedHeaders: ['Content-Type', 'Authorization']
+ }));
+
 
 // Connect to database
 dbConnect();
@@ -18,6 +29,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
+app.use("/rides", rideRoutes);
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Successfully Connected with Typescript");

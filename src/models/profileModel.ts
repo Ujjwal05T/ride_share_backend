@@ -6,7 +6,7 @@ const RideSchema = new Schema<Ride>({
   destination: { type: String, required: true },
   date: { type: Date, required: true },
   fare: { type: Number, required: true },
-  cotravelers: { type: [String], default: [] }
+  coRiders: { type: [String], default: [] }
 });
 
 const ProfileSchema: Schema<Profile> = new Schema({
@@ -24,13 +24,17 @@ const ProfileSchema: Schema<Profile> = new Schema({
   },
   fullName: {
     type: String,
-    required: [true, "Full name is required"],
+    default: "",
   },
   phone: { 
     type: String, 
-    required: true 
+    default: ""
   },
   rating: { 
+    type: Number, 
+    default: 0 
+  },
+  totalRides: { 
     type: Number, 
     default: 0 
   },
@@ -41,7 +45,7 @@ const ProfileSchema: Schema<Profile> = new Schema({
 });
 
 const ProfileModel =
-  mongoose.models.UserProfile ||
+  mongoose.models.Profile ||
   mongoose.model<Profile>("Profile", ProfileSchema);
 
 export default ProfileModel;

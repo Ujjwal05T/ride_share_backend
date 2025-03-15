@@ -6,6 +6,6 @@ const router = Router();
 
 // Protected routes that require authentication
 router.get("/get-profile", authenticateWithToken, getProfile);
-router.post("/update-profile", authenticateWithToken, updateProfile);
+router.put("/update-profile", authenticateWithToken, updateProfile);
 
 export default router;

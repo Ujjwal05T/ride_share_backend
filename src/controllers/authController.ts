@@ -4,6 +4,7 @@ import { JwtPayload, User } from "../types/types";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { sendVerificationEmail } from "../helpers/sendVerificationMail";
+import ProfileModel from "../models/profileModel";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -51,6 +52,11 @@ export const register = async (req: Request, res: Response) => {
         verifyCodeExpiry: expiryDate,
       });
       await newUser.save();
+      const newUserProfile = new ProfileModel({
+        username,
+        email
+      })
+      await newUserProfile.save()
     }
 
     const emailResponse = await sendVerificationEmail(

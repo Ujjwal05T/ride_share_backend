@@ -19,6 +19,7 @@ export interface Profile {
    fullName: string;
    phone: string;
    rating: number;
+   totalRides: number;
    history: Ride[];
 }
 
@@ -27,5 +28,11 @@ export interface Ride {
    destination: string;
    date: Date;
    fare: number;
-   cotravelers: string[];
+   coRiders: string[];
+   seatsAvailable: number;
+   description: string;
+   pendingRequests: string[]; 
+   distance?: number;
+   rideExpiry?:boolean;
+
 }

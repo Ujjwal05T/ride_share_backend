@@ -13,9 +13,10 @@ export const getProfile = async (req: Request, res: Response) => {
       });
       return
     }
-    const profile: Profile | null = await ProfileModel.findOne({
+    const profile = await ProfileModel.findOne({
       username,
     });
+    console.log("Profile", profile);
     if (!profile) {
       res.status(404).json({
         success: false,
